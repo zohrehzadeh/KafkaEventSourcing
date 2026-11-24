@@ -1,0 +1,11 @@
+@Post.Cmd.Api_HostAddress = http://localhost:5034
+
+GET {{Post.Cmd.Api_HostAddress}}/openapi/v1.json
+Accept: application/json
+
+###
+
+GET {{Post.Cmd.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
