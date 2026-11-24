@@ -1,0 +1,38 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+    {
+      "name": "Post.Cmd.Api",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/SM-Post/Post.Cmd/Post.Cmd.Api/bin/Debug/net11.0/Post.Cmd.Api.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/SM-Post/Post.Cmd/Post.Cmd.Api",
+      "stopAtEntry": false,
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_URLS": "http://localhost:5010"
+      }
+    },
+    {
+      "name": "Post.Query.Api",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/SM-Post/Post.Query/Post.Query.Api/bin/Debug/net11.0/Post.Query.Api.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/SM-Post/Post.Query/Post.Query.Api",
+      "stopAtEntry": false,
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_URLS": "http://localhost:5011"
+      }
+    },
+    {
+      "name": ".NET Core Attach",
+      "type": "coreclr",
+      "request": "attach"
+    }
+    ]
+}
