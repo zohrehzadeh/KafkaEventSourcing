@@ -1,0 +1,56 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using CQRS.Core.Events;
+
+namespace CQRS.Core.Domain
+{
+    public abstract class AggregateRoot
+    {
+        protected Guid _id;
+        public Guid Id 
+        { 
+            get => _id; 
+        }
+        private readonly List<BaseEvent> _changes = new();
+        public int Version { get; set; }    
+        public IEnumerable<BaseEvent> GetUncommittedChanges()
+        {
+            return _changes;
+        }
+        public void markChangesAsCommitted()
+        {
+            _changes.Clear();
+        }
+        private void ApplyChange(BaseEvent @event, bool isNew)
+        {
+            var method = this.GetType().GetMethod("Apply", new[] { @event.GetType() });
+            if(method == null)
+            {
+                throw new ArgumentNullException(nameof(method), 
+                $"Apply method not found for event type: {@event.GetType().Name}");
+            }
+            method.Invoke(this, new object[] { @event });
+            if (isNew)
+            {
+                _changes.Add(@event);
+            }
+        }
+        protected void RaiseEvent(BaseEvent @event)
+        {
+            ApplyChange(@event, true);
+        }
+        public void ReplyChanges(BaseEvent @event)
+        {
+            ApplyChange(@event, true);
+        }
+        public void ReplayEvents(IEnumerable<BaseEvent> events)
+        {
+            foreach (var @event in events)
+            {
+                ApplyChange(@event, false);
+            }
+        }
+    }
+}
