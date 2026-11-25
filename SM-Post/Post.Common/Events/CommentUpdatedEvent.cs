@@ -1,4 +1,6 @@
-namespace Post.Cmd.Api.Events
+using CQRS.Core.Events;
+
+namespace Post.Common.Events
 {
     public class CommentUpdatedEvent: BaseEvent
     {

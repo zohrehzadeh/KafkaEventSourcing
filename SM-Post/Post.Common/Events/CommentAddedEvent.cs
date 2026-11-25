@@ -1,9 +1,11 @@
+using CQRS.Core.Events;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Post.Cmd.Api.Events
+namespace Post.Common.Events
 {
     public class CommentAddedEvent : BaseEvent
     {
