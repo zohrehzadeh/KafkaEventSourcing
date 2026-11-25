@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using CQRS.Core.Events;
 
 namespace CQRS.Core.Domain
@@ -19,7 +15,7 @@ namespace CQRS.Core.Domain
         {
             return _changes;
         }
-        public void markChangesAsCommitted()
+        public void MarkChangesAsCommitted()
         {
             _changes.Clear();
         }
