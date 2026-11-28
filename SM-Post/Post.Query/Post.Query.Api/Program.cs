@@ -12,15 +12,28 @@ Action<DbContextOptionsBuilder> configureDbContext = options =>
 };
 builder.Services.AddDbContext<DatabaseContext>(configureDbContext);
 builder.Services.AddSingleton<DatabaseContextFactory>(new DatabaseContextFactory(configureDbContext));
+// create database and tables from Code First
+var dataContext = builder.Services.BuildServiceProvider().GetRequiredService<DatabaseContext>();
+dataContext.Database.EnsureCreated();
+
+
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
+app.MapControllers();
 
 app.Run();
 
